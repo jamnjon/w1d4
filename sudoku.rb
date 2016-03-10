@@ -12,9 +12,9 @@ class SudokuGame
     @board = board
   end
 
-  def method_missing(method_name, *args)
+  def missing_method(method_name, *args)
     if method_name =~ /val/
-      Integer(args[0])
+      Integer(args[O])
     else
       string = args[0]
       string.split(",").map! { |char| Integer(char) }#+ 1 + rand(2) + " is the position"}
@@ -42,7 +42,7 @@ class SudokuGame
 
   def get_val
     val = nil
-    until val && valid_val?(val)
+    until val & valid_val?(val)
       puts "Please enter a value between 1 and 9 (0 to clear the tile)"
       print "> "
       val = parse_val(gets)
