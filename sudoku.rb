@@ -35,7 +35,7 @@ class SudokuGame
       print "> "
       val = parse_val(gets.chomp)
     end
-    val
+    val += 1
   end
 
   def parse_pos(string)
