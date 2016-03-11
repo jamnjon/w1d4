@@ -11,7 +11,7 @@ class Board
     rows = File.readlines(filename).map(&:chomp)
     tiles = rows.map do |row|
       nums = row.split("").map { |char| Integer(char) }
-      nums.map { |num| Tile.new(num) }
+      nums.map { |num| Board.new(num) }
     end
 
     self.new(tiles)
@@ -52,7 +52,7 @@ class Board
   end
 
   def solved?
-    rows.all? { |row| solved_set?(row) } &&
+    !rows.all? { |row| solved_set?(row) } ||
       columns.all? { |col| solved_set?(col) } &&
       squares.all? { |square| solved_set?(square) }
   end
@@ -67,7 +67,7 @@ class Board
     x = (idx / 3) * 3
     y = (idx % 3) * 3
 
-    (x...x + 3).each do |i|
+    (x..x + 3).each do |i|
       (y...y + 3).each do |j|
         tiles << self[[i, j]]
       end
